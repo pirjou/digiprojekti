@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Digiprojekti - HOPS kysely</title>
+</head>
+<body>
+
+<form id="lomake">
+    
+</form>
+
+<!-- linkki jquery pääkirjastoon -->  
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+
+<!-- oma scripti -->
+    
+<script>
+    
+$.getJSON("https://ohtu-kyselyprojekti.herokuapp.com/questions", function(data) {
+    var items =[]; //taulukko, johon kerätään lomake
+    
+    // jos kaarisulku items.push(data.title);
+    
+    // jos hakasulut
+    $.each(data, function(key,d){
+       items.push(d.title+"<br>+<input type=text id="+d.id +"><br>");
+    });
+    
+    // sivun lomakkeen tulostus
+    $("#lomake").append(items.join(" "));
+});   
+    
+</script>    
+    
+</body>
+</html>
