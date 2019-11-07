@@ -1,0 +1,12 @@
+Mitä tehdään? Kenelle? Miksi? 
+
+Kyselylomaketta tietojenkäsittelyn opiskelijoille HOPS:in käyttökokemukseen liittyen. Kyselyn tarkoituksena on saada kehitysideaoita 
+HOPS:iin liittyen.
+
+Keitä ovat tiimin jäsenet? 
+
+Digi: Andreas Arnici ja Pirjo Ungert
+Ohtu: Silva Sivé, Aino Tani, Kasper Toikkanen, Meri Toivonen, Venla Vihersaari ja Markus Väänänen 
+
+Mitä osaamista kukin tuo projektiin?
+
