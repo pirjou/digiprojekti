@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152528706-1"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-152528706-1');
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Bebas+Neue|PT+Sans+Narrow&display=swap" rel="stylesheet">
+
+    <!-- alert-ikkunan linkit -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <title>Digiprojekti - HOPS kysely</title>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+    <link rel="stylesheet" href="Dynaaminen.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body>
+
+
+
+
+
+    <div id="div1">
+        <h1>HOPS kysely</h1>
+
+        <p>Tämä kysely on osa digiprojektikurssia.</p>
+        <p>Tarkoituksena on kartoittaa tietojenkäsittelyn opiskelijoiden kokemuksia HOPS:in käytöstä.</p>
+
+        <form id="lomake">
+
+
+
+        </form>
+
+        <!-- alert-ikkuna vastauksen lähettämisen jälkeen -->
+        <div id="div2" class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Kiitos!</strong> Vastausten lähettäminen onnistui.
+        </div>
+
+    </div>
+
+
+
+
+    <!-- linkki jquery pääkirjastoon -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- oma scripti -->
+
+    <script>
+        var lomakekentta = []; // kerätään id-tunnukset tänne
+        $.getJSON("https://ohtu-kyselyprojekti.herokuapp.com/questions", function(data) {
+            var items = []; //taulukko, johon kerätään lomake
+
+            // jos hakasulut
+            $.each(data, function(key, d) {
+                items.push(d.title + "<br><input type=text id=" + d.qid + "><br>");
+                // lomakekenttätaulukkoon id-tunnus
+                lomakekentta.push(d.qid);
+            });
+            items.push(" <input type=submit value=Lähetä class=button onClick=lahetys()> ");
+            // sivun lomakkeen tulostus
+            $("#lomake").append(items.join(" "));
+        });
+
+        function lahetys() {
+            alert(lomakekentta.length);
+            for (i = 0; i < lomakekentta.length; i++) {
+
+                alert(lomakekentta[i]);
+                alert(document.getElementById(lomakekentta[i]).value);
+
+                document.getElementById("div2").style.display = 'block';
+
+            }
+        }
+    </script>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBr-gpCGqS3Yb2qIBsIp5ermChTqaE3mlI",
+            authDomain: "hops-kysely.firebaseapp.com",
+            databaseURL: "https://hops-kysely.firebaseio.com",
+            projectId: "hops-kysely",
+            storageBucket: "hops-kysely.appspot.com",
+            messagingSenderId: "155824568540",
+            appId: "1:155824568540:web:e132afce09c30947badc19",
+            measurementId: "G-93NKJPR43Y"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.5.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/7.5.2/firebase-analytics.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+
+
+</body></html>

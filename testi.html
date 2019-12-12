@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Oppimistehtävä 3</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  
+<div class="container">
+	<div class="rows">
+	<div class="col-md-6">
+		<h2 id="otsikko">Miten menee?</h2>
+		
+			<form>
+			Nimi:<br>
+			<input type="text" id="nimi" required>
+			<br>
+			Viesti:<br>
+			<textarea id="viesti" required></textarea><br>
+			<button onClick="laheta()">Lähetä</button>
+			</form>
+	</div>
+	
+	<div class="col-md-6">
+		<h2>Viestit</h2>
+		<div id="viestiketju">
+		</div>
+	
+	
+	</div>
+	</div>
+	
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBr-gpCGqS3Yb2qIBsIp5ermChTqaE3mlI",
+    authDomain: "hops-kysely.firebaseapp.com",
+    databaseURL: "https://hops-kysely.firebaseio.com",
+    projectId: "hops-kysely",
+    storageBucket: "hops-kysely.appspot.com",
+    messagingSenderId: "155824568540",
+    appId: "1:155824568540:web:e132afce09c30947badc19",
+    measurementId: "G-93NKJPR43Y"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+ 
+
+  	var firebaseRef = firebase.database();
+   
+// otsikon hakeminen firebasesta
+    
+var fireHeading = document.getElementById("otsikko");
+var firebaseHeadingRef = firebase.database().ref().child("heading"); 
+ 
+firebaseHeadingRef.on('value', function(datasnapshot){ fireHeading.innerText=datasnapshot.val(); }); 
+ 
+
+  function laheta(){
+	
+	// tekstin tallennus
+	
+	var firebaseRef = firebase.database().ref();
+	var lahettaja = nimi.value;
+	var teksti = mainText.value;
+	firebaseRef.child("viestit").push().set({
+		nimi: lahettaja,
+		viesti: teksti
+	})
+};
+
+  // tietojen hakeminen firebasesta
+    
+	var rootRef = firebase.database().ref().child('viestit');
+	rootRef.on('child_added', snap =>
+		{
+		 var nimi = snap.child("nimi").val();
+		 var viesti = snap.child("viesti").val(); 
+	$("#viestiketju").append("<p>"+ nimi + ": " + viesti + "</p>"); 
+}
+);
+  
+</script>
+
+
+</body>
+</html>

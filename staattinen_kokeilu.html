@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Digiprojekti - HOPS kysely</title>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        
+    <style>
+        
+        input[name=naama], input.na {display: none;}
+        i   {font-size: 36px;}
+        .check label {display:inline-block; height: 36px; border-radius:50%;} 
+        
+        h1 {
+        font-family: "Courier New";
+        }
+
+        #div1 {
+        background-color: aliceblue;
+        text-align: center;
+        margin-left: 25%;
+        margin-right: 25%;
+        padding: 1%;
+        border: solid black 1px;
+        font-size: 18px;
+        font-family: cursive;
+            
+        }
+
+        select {
+        font-size: 16px;
+        font-family: cursive;
+        }
+
+        input[type=submit] {
+        font-size: 18px;
+        font-family: cursive;
+        }
+
+        input[type=reset] {
+        font-size: 18px;
+        font-family: cursive;
+        }
+        
+        .button {
+        text-align: center;
+        }
+        
+    </style>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+    
+    <script> // HYMYNAAMAT 
+        
+    $(document).ready(function(){
+        $(".kuva1").click(function(){
+            $("i").css({'color':'black'})
+            $(this).css({'color':'green'})
+        });
+    });
+          $(document).ready(function(){
+        $(".kuva2").click(function(){
+            $("i").css({'color':'black'})
+            $(this).css({'color':'yellow'})
+        });
+    }); 
+        $(document).ready(function(){
+        $(".kuva3").click(function(){
+            $("i").css({'color':'black'})
+            $(this).css({'color':'red'})
+        });
+    });
+    
+    </script>
+</head>
+<body>
+
+<div id="div1">
+    <h1>HOPS kysely</h1>
+    
+    <p>Tämä kysely on osa digiprojektikurssia. Tarkoituksena on kartoittaa tietojenkäsittelyn opiskelijoiden kokemuksia HOPS:in käytöstä.</p>
+    
+    <form id="lomake">
+        <h3>Minkä vuoden opiskelija olet?</h3>
+            <input type="radio" name="vuosi" value="1. vuoden"> 1. vuoden 
+            <input type="radio" name="vuosi" value="2. vuoden"> 2. vuoden
+            <input type="radio" name="vuosi" value="3. vuoden"> 3. vuoden 
+            <input type="radio" name="vuosi" value="4. vuoden"> 4. vuoden
+            <input type="radio" name="vuosi" value="5. vuoden"> 5. vuoden
+        
+        <h3>Mihin profiiliin olet suuntautumassa/suuntautunut?</h3>
+        <select name="profiili">
+            <option value="profiili">Ohjelmistotuotanto</option>
+            <option value="profiili">Digitaaliset palvelut</option>
+            <option value="profiili">ICT-infrastruktuuri</option>
+            <option value="profiili">Liiketoiminta ja ICT</option>       
+        </select>
+        
+        <h3>Miten mielestäsi HOPS:iin perehdytettiin opintojen alussa?</h3>
+    <label>    
+    <input type="radio" name="naama">
+        <i class='far fa-smile kuva1'></i>
+    </label>
+    <label>    
+    <input type="radio" name="naama">
+        <i class='far fa-meh kuva2'></i>
+    </label>
+    <label>    
+    <input type="radio" name="naama">
+        <i class='far fa-frown kuva3'></i>
+    </label>
+         
+         <h3>Minkälaisia ongelmia olet kohdannut opintojen edetessä HOPS:iin liittyen?</h3>
+          <textarea rows="12" cols="60"></textarea>
+        
+        <h3>Minkälaisia ominaisuuksia HOPS:in luomiseen voitaisiin lisätä?</h3>
+          <textarea rows="12" cols="60"></textarea>
+            
+            <div>
+            <input type="submit" value="Lähetä" class="button">
+            <input type="reset" value="Palauta" class="button">
+            </div>
+    </form>
+</div>
+    
+<!-- linkki jquery pääkirjastoon -->  
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+
+<!-- oma scripti -->
+    
+<script>
+     var lomakekentta = []; // kerätään id-tunnukset tänne
+     $.getJSON("https://ohtu-kyselyprojekti.herokuapp.com/questions", function(data) {
+     var items =[]; //taulukko, johon kerätään lomake
+    
+    // jos hakasulut
+    $.each(data, function(key,d){
+        items.push(d.teksti);
+       items.push(d.title+"<br>+<input type=text id="+d.id +"><br>");
+        // lomakekenttätaulukkoon id-tunnus
+        lomakekentta.push(d.id);
+    });
+    
+    // sivun lomakkeen tulostus
+    $("#lomake").append(items.join(" "));
+});
+    
+function lahetys(){
+   for (i = 0; i < lomakekentta.lenght; i++) {
+       alert(lomakekentta.length);
+       alert(document.getElementById(lomakekentta[i]).value);
+   } 
+}    
+    
+</script>
+    
+</body>
+</html>
